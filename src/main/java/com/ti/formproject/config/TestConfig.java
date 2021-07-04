@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Profile;
 
 import com.ti.formproject.entities.Client;
 import com.ti.formproject.entities.Order;
+import com.ti.formproject.entities.OrderItem;
 import com.ti.formproject.entities.Product;
 import com.ti.formproject.repositories.ClientRepository;
+import com.ti.formproject.repositories.OrderItemRepository;
 import com.ti.formproject.repositories.OrderRepository;
 import com.ti.formproject.repositories.ProductRepository;
 
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -48,6 +53,13 @@ public class TestConfig implements CommandLineRunner{
 		Product p4 = new Product(null, "Netflix", 22.50);
 		
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o2, p3, 12, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o4, p2, 1, p2.getPrice());
+		OrderItem oi4 = new OrderItem(o1, p4, 1, p1.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 
 }

@@ -2,6 +2,8 @@ package com.ti.formproject.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order")
@@ -30,11 +34,13 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id")
 	private Client client;
 	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
+	
 	public Order() {
 	}
 
 	public Order(Long id, Instant date, Client client) {
-		super();
 		this.id = id;
 		this.date = date;
 		this.client = client;
@@ -62,6 +68,18 @@ public class Order implements Serializable {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+	
+	public Double getTotal() {
+		double total = 0;
+		for (OrderItem x : items) {
+			total += x.getSubTotal();
+		}
+		return total;
 	}
 
 	@Override
