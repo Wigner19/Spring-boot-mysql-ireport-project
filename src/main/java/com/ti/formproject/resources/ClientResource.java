@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ti.formproject.entities.Client;
@@ -25,10 +26,18 @@ public class ClientResource {
 	@Autowired
 	private ClientService service;
 
+//	@GetMapping
+//	public ResponseEntity<List<Client>> findAll() {
+//		List<Client> list = service.findAll();
+//		return ResponseEntity.ok().body(list);
+//	}
+	
 	@GetMapping
-	public ResponseEntity<List<Client>> findAll() {
+	public ModelAndView findAll() {
 		List<Client> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("list", list);
+		return mav;
 	}
 	
 	@GetMapping(value = "/{id}")

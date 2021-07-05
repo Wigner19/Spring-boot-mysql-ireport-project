@@ -26,7 +26,7 @@ public class ResourceExceptionHandler {
 	
 	@ExceptionHandler(AlreadyExistsException.class)
 	public ResponseEntity<StandardError> notFound(AlreadyExistsException e, HttpServletRequest request) {
-		HttpStatus status = HttpStatus.NOT_FOUND;
+		HttpStatus status = HttpStatus.BAD_REQUEST;
 		String error = "Already exists!";
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);

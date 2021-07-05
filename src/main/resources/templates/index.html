@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Home Page</title>
-	</head>
-	<body>
-		<h1>Pagina inicial</h1>
-	</body>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <title>Home Page</title>
+    </head>
+
+    <body>
+        <div class="menu">
+
+            <nav class="nav">
+
+                <div class="nav_logo"><i class='bx bxl-spring-boot' ></i></div>
+
+                <ul>
+
+                    <li><a href="#"><i class='bx bxs-home-smile'>HOME</i></a></li>
+                    <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a></li>
+                    <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a></li>
+                    <li><a href="/orders"><i class='bx bxs-cart-add'>ORDERS</i></a></li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+        
+        <div th:each="list : ${list}">
+        	
+        	<div>
+	        	<span th:text="${list.name}"></span>
+	        	<span th:text="${list.email}"></span>
+	        	<span th:text="${list.password}"></span>
+        	</div>
+
+        </div>
+    </body>
+
 </html>
