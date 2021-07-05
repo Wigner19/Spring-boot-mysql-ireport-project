@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ti.formproject.entities.Product;
 import com.ti.formproject.repositories.ProductRepository;
-import com.ti.formproject.services.exceptions.ClientAlreadyExistsException;
+import com.ti.formproject.services.exceptions.AlreadyExistsException;
 import com.ti.formproject.services.exceptions.DatabaseException;
 import com.ti.formproject.services.exceptions.ResourceNotFoundException;
 
@@ -34,7 +34,7 @@ public class ProductService {
 		List<Product> list = repository.findAll();
 		for (Product x : list) {
 			if (x.equals(obj)) {
-				throw new ClientAlreadyExistsException();
+				throw new AlreadyExistsException();
 			}
 		}
 		return repository.save(obj);

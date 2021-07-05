@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.ti.formproject.services.exceptions.ClientAlreadyExistsException;
+import com.ti.formproject.services.exceptions.AlreadyExistsException;
 import com.ti.formproject.services.exceptions.DatabaseException;
 import com.ti.formproject.services.exceptions.ResourceNotFoundException;
 
@@ -24,10 +24,10 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
-	@ExceptionHandler(ClientAlreadyExistsException.class)
-	public ResponseEntity<StandardError> notFound(ClientAlreadyExistsException e, HttpServletRequest request) {
+	@ExceptionHandler(AlreadyExistsException.class)
+	public ResponseEntity<StandardError> notFound(AlreadyExistsException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		String error = "Client already exsist!";
+		String error = "Already exists!";
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
