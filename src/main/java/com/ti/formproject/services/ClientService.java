@@ -51,9 +51,13 @@ public class ClientService {
 	}
 
 	private void updateData(Optional<Client> client, Client obj) {
-		client.get().setName(obj.getName());
-		client.get().setEmail(obj.getEmail());
-		client.get().setPassword(obj.getPassword());
+		if (obj.getName() != null) {
+			client.get().setName(obj.getName());			
+		} else if (obj.getEmail() != null) {
+			client.get().setEmail(obj.getEmail());			
+		} else if (obj.getPassword() != null) {
+			client.get().setPassword(obj.getPassword());			
+		}
 	}
 	
 	public void delete(Long id) {

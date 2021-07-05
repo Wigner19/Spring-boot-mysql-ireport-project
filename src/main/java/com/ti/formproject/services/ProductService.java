@@ -51,8 +51,13 @@ public class ProductService {
 	}
 
 	private void updateData(Optional<Product> product, Product obj) {
-		product.get().setName(obj.getName());
-		product.get().setPrice(obj.getPrice());
+		if (obj.getName() != null) {
+			product.get().setName(obj.getName());			
+		}
+		
+		if(obj.getPrice() != null) {
+			product.get().setPrice(obj.getPrice());
+		}
 	}
 	
 	public void delete(Long id) {
