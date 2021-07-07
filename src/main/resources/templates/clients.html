@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="pt-br">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="css/clients.css">
         <title>Home Page</title>
     </head>
 
     <body>
-        <div class="menu">
+        <header class="menu">
 
             <nav class="nav">
 
                 <div class="nav_logo"><i class='bx bxl-spring-boot' ></i></div>
 
-                <ul>
+                <ul class="nav_list">
 
-                    <li><a href="#"><i class='bx bxs-home-smile'>HOME</i></a></li>
                     <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a></li>
                     <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a></li>
                     <li><a href="/orders"><i class='bx bxs-cart-add'>ORDERS</i></a></li>
+                    <li><a href="/items"><i class='bx bxs-home-smile'>ITEMS</i></a></li>
 
                 </ul>
 
             </nav>
 
-        </div>
-        
-        <div th:each="list : ${list}">
-        	
-        	<div>
-	        	<span th:text="${list.name}"></span>
-	        	<span th:text="${list.email}"></span>
-	        	<span th:text="${list.password}"></span>
-        	</div>
+        </header>
 
-        </div>
+        <main>
+
+			<div class="content">			
+
+	            <div th:each="list : ${list}" class="items">
+                    <span>Name -> </span><span th:text="${list.name}"></span>
+                    <a th:href="@{/clients/delete/(client_user=${list.id})}" class="delete" ><i class='bx bx-x'></i></a>
+                    <br>
+                    <span>Email -> </span><span th:text="${list.email}"></span>
+	            </div>
+
+			</div>
+
+        </main>
     </body>
 
 </html>

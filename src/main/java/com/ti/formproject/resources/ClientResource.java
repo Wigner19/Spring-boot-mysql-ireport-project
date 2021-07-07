@@ -1,11 +1,14 @@
 package com.ti.formproject.resources;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +38,7 @@ public class ClientResource {
 	@GetMapping
 	public ModelAndView findAll() {
 		List<Client> list = service.findAll();
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView("clients");
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -59,9 +62,9 @@ public class ClientResource {
 		return ResponseEntity.ok().body(client);
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		service.delete(id);
-		return ResponseEntity.noContent().build();
+	@GetMapping(value = "/delete")
+	public void delete(@PathParam(value="client_user") Long client_user, HttpServletResponse httpResponse) throws IOException {
+		service.delete(client_user);
+		httpResponse.sendRedirect("/clients");
 	}
 }

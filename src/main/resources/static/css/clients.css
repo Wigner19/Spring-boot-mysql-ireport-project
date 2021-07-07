@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+@import url(https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: white;
+    font-family: "Press Start 2P";
+}
+
+a:hover {
+    color: orange;
+    transition: .5s;
+}
+
+span {
+	color: white;
+	font-family: "Press Start 2P";
+	font-size: 11px;
+}
+
+/* Menu */
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #0A3D7E;
+    height: 15vh;
+}
+
+.nav_logo {
+    font-size: 24px;
+    color: white;
+}
+
+.nav_list {
+    list-style: none;
+    display: flex;
+}
+
+.nav_list li{
+    letter-spacing: 3px;
+    margin-left: 40px;
+}
+
+main {
+	display: inline-flex;
+    background-color: gray;
+    padding: 15px;
+    border: 2px solid black;
+    width: 100%;
+    height: 85vh;
+}
+
+/* Content */
+
+.content {
+    display: inline-flex;
+	flex-direction: row;
+    justify-content: space-between;
+	align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    border: 2px solid green;
+}
+
+.items {
+    position: relative;
+    border: 5px solid #034384;
+	box-shadow: 2px 2px 2px white;
+	border-radius: 5px;
+    padding: 15px;
+    margin-left: 5px;
+    width: 340px;
+    height: 80px;
+}
+
+main .content .items .delete {
+    position: absolute;
+    font-size: medium;
+    right: 3px;
+    top: 0px;
+}

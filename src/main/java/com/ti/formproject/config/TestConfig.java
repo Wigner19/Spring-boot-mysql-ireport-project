@@ -38,13 +38,14 @@ public class TestConfig implements CommandLineRunner{
 		Client c1 = new Client(null, "Wigner", "wigner12@gmail.com", "123456789");
 		Client c2 = new Client(null, "Luiz", "luiz@gmail.com", "1239");
 		Client c3 = new Client(null, "Andre", "andre@gmail.com", "123456");
+		Client c4 = new Client(null, "José", "jose@gmail.com", "123456");
 	
 		Order o1 = new Order(null, Instant.parse("2021-07-22T15:12:22Z"), c1);
 		Order o2 = new Order(null, Instant.parse("2021-05-15T02:02:12Z"), c2);
 		Order o3 = new Order(null, Instant.parse("2021-02-20T00:22:52Z"), c3);
 		Order o4 = new Order(null, Instant.parse("2021-12-07T17:52:02Z"), c1);
 		
-		clientRepository.saveAll(Arrays.asList(c1, c2, c3));
+		clientRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4));
 		
 		Product p1 = new Product(null, "TV", 2500.00);
