@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+	
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Client Form</title>
+		<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="../../css/formClient.css">
+	</head>
+	
+	<body>
+	
+		<header>
+	
+			<nav class="nav">
+			
+			    <div class="nav_logo"><i class='bx bxl-spring-boot' ></i></div>
+			
+			    <ul class="nav_list">
+			
+			        <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a>
+			        	<ul class='products'>
+			        		<li><a href="/products"><i class='bx bxs-user'>PRODUCTS</i></a></li>
+			        		<li><a href="/products/formProduct"><i class='bx bxs-user'>ADD PRODUCT</i></a></li>
+			        	</ul>
+			        </li>
+			        
+			        
+			        <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a>
+			        	<ul class="clients">
+			        		<li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a></li>
+			        		<li><a href="/clients/formClient"><i class='bx bxs-user'>ADD CLIENT</i></a></li>
+			        	</ul>
+			        </li>
+			        
+			        <li><a href="/orders"><i class='bx bxs-cart-add'>REPORT</i></a></li>
+			
+			    </ul>
+			
+			</nav>
+	
+		</header>
+		
+		<main>
+		
+			<h1>Cadastro de cliente</h1>
+			
+			<form method="post">
+				<div>
+				
+					Name <input type="text" name="name" required/>
+					Email <input type="email" name="email" required/>
+					Password <input type="number" name="password" required/>
+					
+					<button type="submit">Salvar</button>
+
+				</div>
+			</form>
+			
+		</main>
+
+	</body>
+</html>

@@ -31,12 +31,7 @@ public class ClientService {
 	}
 	
 	public Client insert(Client obj) {
-		List<Client> list = repository.findAll();
-		for (Client x : list) {
-			if (x.equals(obj)) {
-				throw new AlreadyExistsException();
-			}
-		}
+		alreadyExists(obj);
 		return repository.save(obj);
 	}
 	
@@ -44,19 +39,25 @@ public class ClientService {
 		try {
 			Optional<Client> client = repository.findById(id);
 			updateData(client, obj);
-			return repository.save(client.get());			
+			return repository.save(obj);			
 		} catch (NoSuchElementException e) {
 			throw new ResourceNotFoundException("Client not found!");
 		}
 	}
 
 	private void updateData(Optional<Client> client, Client obj) {
-		if (obj.getName() != null) {
-			client.get().setName(obj.getName());			
-		} else if (obj.getEmail() != null) {
-			client.get().setEmail(obj.getEmail());			
-		} else if (obj.getPassword() != null) {
-			client.get().setPassword(obj.getPassword());			
+		alreadyExists(obj);
+		client.get().setName(obj.getName());			
+		client.get().setEmail(obj.getEmail());			
+		client.get().setPassword(obj.getPassword());			
+	}
+	
+	public void alreadyExists(Client obj) {
+		List<Client> list = repository.findAll();
+		for (Client x : list) {
+			if (x.equals(obj)) {
+				throw new AlreadyExistsException();
+			}
 		}
 	}
 	

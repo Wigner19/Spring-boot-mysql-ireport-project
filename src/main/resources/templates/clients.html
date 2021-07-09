@@ -19,10 +19,22 @@
 
                 <ul class="nav_list">
 
-                    <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a></li>
-                    <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a></li>
-                    <li><a href="/orders"><i class='bx bxs-cart-add'>ORDERS</i></a></li>
-                    <li><a href="/items"><i class='bx bxs-home-smile'>ITEMS</i></a></li>
+                    <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a>
+                    	<ul class='products'>
+                    		<li><a href="/products"><i class='bx bxs-user'>PRODUCTS</i></a></li>
+                    		<li><a href="/products/formProduct"><i class='bx bxs-user'>ADD PRODUCT</i></a></li>
+                    	</ul>
+                    </li>
+                    
+                    
+                    <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a>
+                    	<ul class="clients">
+                    		<li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a></li>
+                    		<li><a href="/clients/formClient"><i class='bx bxs-user'>ADD CLIENT</i></a></li>
+                    	</ul>
+                    </li>
+                    
+                    <li><a href="/orders"><i class='bx bxs-cart-add'>REPORT</i></a></li>
 
                 </ul>
 
@@ -36,9 +48,10 @@
 
 	            <div th:each="list : ${list}" class="items">
                     <span>Name -> </span><span th:text="${list.name}"></span>
-                    <a th:href="@{/clients/delete/(client_user=${list.id})}" class="delete" ><i class='bx bx-x'></i></a>
+                    <a th:href="@{/clients/delete/(client_id=${list.id})}" class="delete" ><i class='bx bx-x'></i></a>
                     <br>
                     <span>Email -> </span><span th:text="${list.email}"></span>
+                    <a th:href="@{/clients/update/(client_id=${list.id})}" class="update" ><i class='bx bxs-pencil'></i></a>
 	            </div>
 
 			</div>

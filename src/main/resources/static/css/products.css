@@ -35,8 +35,8 @@ nav {
 }
 
 .nav_logo {
-	font-size: 25px;
-	color: white;
+    font-size: 24px;
+    color: white;
 }
 
 .nav_list {
@@ -78,6 +78,7 @@ nav {
 .nav_list li .clients li {
 	display: block;
 }
+
 
 main {
 	display: inline-flex;

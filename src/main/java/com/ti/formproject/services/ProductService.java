@@ -26,17 +26,12 @@ public class ProductService {
 	}
 	
 	public Product findById(Long id) {
-		Optional<Product> client = repository.findById(id);
-		return client.orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+		Optional<Product> product = repository.findById(id);
+		return product.orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 	}
 	
 	public Product insert(Product obj) {
-		List<Product> list = repository.findAll();
-		for (Product x : list) {
-			if (x.equals(obj)) {
-				throw new AlreadyExistsException();
-			}
-		}
+		alreadyExists(obj);
 		return repository.save(obj);
 	}
 	
@@ -44,19 +39,24 @@ public class ProductService {
 		try {
 			Optional<Product> product = repository.findById(id);
 			updateData(product, obj);
-			return repository.save(product.get());
+			return repository.save(obj);			
 		} catch (NoSuchElementException e) {
-			throw new ResourceNotFoundException("Product not found");
+			throw new ResourceNotFoundException("Product not found!");
 		}
 	}
 
 	private void updateData(Optional<Product> product, Product obj) {
-		if (obj.getName() != null) {
-			product.get().setName(obj.getName());			
-		}
-		
-		if(obj.getPrice() != null) {
-			product.get().setPrice(obj.getPrice());
+		alreadyExists(obj);
+		product.get().setName(obj.getName());			
+		product.get().setPrice(obj.getPrice());			
+	}
+	
+	public void alreadyExists(Product obj) {
+		List<Product> list = repository.findAll();
+		for (Product x : list) {
+			if (x.equals(obj)) {
+				throw new AlreadyExistsException();
+			}
 		}
 	}
 	

@@ -6,11 +6,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Press Start 2P";
 }
 
 a {
     color: white;
-    font-family: "Press Start 2P";
 }
 
 a:hover {
@@ -18,10 +18,8 @@ a:hover {
     transition: .5s;
 }
 
-span {
-	color: white;
-	font-family: "Press Start 2P";
-	font-size: 11px;
+h1 {
+	text-align: center;
 }
 
 /* Menu */
@@ -79,46 +77,50 @@ nav {
 	display: block;
 }
 
+/* Menu */
+
 main {
-	display: inline-flex;
-    background-color: gray;
-    padding: 15px;
-    width: 100%;
-    height: 85vh;
+	height: 85vh;
+	background-color: #E9F1F4;
+	width: 100%;
 }
 
-/* Content */
-
-.content {
-    display: inline-flex;
-	flex-direction: row;
-    justify-content: space-between;
-	align-items: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
+main h1 {
+	position: relative;
+	padding-top: 50px;
 }
 
-.items {
-    position: relative;
-    border: 5px solid #034384;
-	box-shadow: 2px 2px 2px white;
-	border-radius: 5px;
-    padding: 15px;
-    width: 340px;
-    height: 80px;
+form {
+	position: relative;
+	margin-top: 40px;
+	border: 2px solid black;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px purple;
+	margin-left: 25%;
+	margin-right: 25%;
+	height: 42.5vh;
+	padding: 10px;
 }
 
-main .content .items .delete {
-    position: absolute;
-    font-size: medium;
-    right: 3px;
-    top: 0px;
+form div {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+	height: 38vh;
 }
 
-main .content .items .update {
-	position: absolute;
-    font-size: medium;
-    right: 3px;
-    top: 50px;
+form div input {
+	text-align: center;
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+form div button {
+	background-color: black;
+	color: white;
+	height: 30px;
+	margin-left: 150px;
+	margin-right: 150px;
+	border-radius: 10px;
 }

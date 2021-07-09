@@ -1,7 +1,6 @@
 package com.ti.formproject.resources;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,14 +9,12 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ti.formproject.entities.Client;
 import com.ti.formproject.services.ClientService;
@@ -29,12 +26,6 @@ public class ClientResource {
 	@Autowired
 	private ClientService service;
 
-//	@GetMapping
-//	public ResponseEntity<List<Client>> findAll() {
-//		List<Client> list = service.findAll();
-//		return ResponseEntity.ok().body(list);
-//	}
-	
 	@GetMapping
 	public ModelAndView findAll() {
 		List<Client> list = service.findAll();
@@ -43,28 +34,41 @@ public class ClientResource {
 		return mav;
 	}
 	
+	@GetMapping(value = "/formClient")
+	public ModelAndView form() {
+		ModelAndView mav = new ModelAndView("formClient");
+		return mav;
+	}
+	
+	@PostMapping(value = "/formClient")
+	public void form(Client obj, HttpServletResponse httpResponse) throws IOException {
+		service.insert(obj);
+		httpResponse.sendRedirect("/clients");
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Client> findById(@PathVariable Long id) {
 		Client client = service.findById(id);
 		return ResponseEntity.ok().body(client);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Client> insert(@RequestBody Client obj) {
-		Client client = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(client);
+	@GetMapping(value = "/update")
+	public ModelAndView updateClient(@PathParam(value="client_id") Long client_id) {
+		ModelAndView mav = new ModelAndView("updateClient");
+		Client client = service.findById(client_id);
+		mav.addObject("client", client);
+		return mav;
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client obj) {
-		Client client = service.update(id, obj);
-		return ResponseEntity.ok().body(client);
+	@PostMapping(value = "/updateClient")
+	public void updateClient(@ModelAttribute("client") Client obj, HttpServletResponse httpResponse) throws IOException {
+		service.update(obj.getId(), obj);
+		httpResponse.sendRedirect("/clients");
 	}
 	
 	@GetMapping(value = "/delete")
-	public void delete(@PathParam(value="client_user") Long client_user, HttpServletResponse httpResponse) throws IOException {
-		service.delete(client_user);
+	public void delete(@PathParam(value="client_id") Long client_id, HttpServletResponse httpResponse) throws IOException {
+		service.delete(client_id);
 		httpResponse.sendRedirect("/clients");
 	}
 }

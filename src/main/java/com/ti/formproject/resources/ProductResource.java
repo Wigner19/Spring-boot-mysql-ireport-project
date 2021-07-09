@@ -1,19 +1,20 @@
 package com.ti.formproject.resources;
 
-import java.net.URI;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ti.formproject.entities.Product;
 import com.ti.formproject.services.ProductService;
@@ -26,9 +27,23 @@ public class ProductResource {
 	private ProductService service;
 
 	@GetMapping
-	public ResponseEntity<List<Product>> findAll() {
+	public ModelAndView findAll() {
 		List<Product> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		ModelAndView mav = new ModelAndView("products");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	@GetMapping(value = "/formProduct")
+	public ModelAndView form() {
+		ModelAndView mav = new ModelAndView("formProduct");
+		return mav;
+	}
+	
+	@PostMapping(value = "/formProduct")
+	public void form(Product obj, HttpServletResponse httpResponse) throws IOException {
+		service.insert(obj);
+		httpResponse.sendRedirect("/products");
 	}
 	
 	@GetMapping(value = "/{id}")
@@ -37,22 +52,23 @@ public class ProductResource {
 		return ResponseEntity.ok().body(product);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Product> insert(@RequestBody Product obj) {
-		Product product = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(product);
+	@GetMapping(value = "/update")
+	public ModelAndView updateProduct(@PathParam(value="product_id") Long product_id) {
+		ModelAndView mav = new ModelAndView("updateProduct");
+		Product product = service.findById(product_id);
+		mav.addObject("product", product);
+		return mav;
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Product> updateClient(@PathVariable Long id, @RequestBody Product obj) {
-		Product product = service.update(id, obj);
-		return ResponseEntity.ok().body(product);
+	@PostMapping(value = "/updateProduct")
+	public void updateProduct(@ModelAttribute("product") Product obj, HttpServletResponse httpResponse) throws IOException {
+		service.update(obj.getId(), obj);
+		httpResponse.sendRedirect("/products");
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		service.delete(id);
-		return ResponseEntity.noContent().build();
+	@GetMapping(value = "/delete")
+	public void delete(@PathParam(value="product_id") Long product_id, HttpServletResponse httpResponse) throws IOException {
+		service.delete(product_id);
+		httpResponse.sendRedirect("/products");
 	}
 }

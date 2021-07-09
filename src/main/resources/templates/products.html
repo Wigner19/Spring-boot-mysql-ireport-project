@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="css/products.css">
+        <title>Products</title>
+    </head>
+
+    <body>
+        <header class="menu">
+
+            <nav class="nav">
+
+                <div class="nav_logo"><i class='bx bxl-spring-boot' ></i></div>
+
+                <ul class="nav_list">
+
+                    <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a>
+                    	<ul class='products'>
+                    		<li><a href="/products"><i class='bx bxs-user'>PRODUCTS</i></a></li>
+                    		<li><a href="/products/formProduct"><i class='bx bxs-user'>ADD PRODUCT</i></a></li>
+                    	</ul>
+                    </li>
+                    
+                    
+                    <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a>
+                    	<ul class="clients">
+                    		<li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a></li>
+                    		<li><a href="/clients/formClient"><i class='bx bxs-user'>ADD CLIENT</i></a></li>
+                    	</ul>
+                    </li>
+                    
+                    <li><a href="/orders"><i class='bx bxs-cart-add'>REPORT</i></a></li>
+
+                </ul>
+
+            </nav>
+
+        </header>
+
+        <main>
+
+			<div class="content">			
+
+	            <div th:each="list : ${list}" class="items">
+                    <span>Name -> </span><span th:text="${list.name}"></span>
+                    <a th:href="@{/products/delete/(product_id=${list.id})}" class="delete" ><i class='bx bx-x'></i></a>
+                    <br>
+                    <span>Price -> </span><span th:text="${list.price}"></span>
+                    <a th:href="@{/products/update/(product_id=${list.id})}" class="update" ><i class='bx bxs-pencil'></i></a>
+	            </div>
+
+			</div>
+
+        </main>
+    </body>
+
+</html>
