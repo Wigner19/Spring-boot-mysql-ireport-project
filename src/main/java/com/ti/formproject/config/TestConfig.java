@@ -18,7 +18,7 @@ import com.ti.formproject.repositories.OrderRepository;
 import com.ti.formproject.repositories.ProductRepository;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner{
 
 	@Autowired
@@ -58,7 +58,7 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
 		OrderItem oi2 = new OrderItem(o2, p3, 12, p3.getPrice());
 		OrderItem oi3 = new OrderItem(o4, p2, 1, p2.getPrice());
-		OrderItem oi4 = new OrderItem(o1, p4, 1, p1.getPrice());
+		OrderItem oi4 = new OrderItem(o1, p4, 1, p4.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}

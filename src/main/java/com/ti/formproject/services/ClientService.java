@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ti.formproject.entities.Client;
 import com.ti.formproject.repositories.ClientRepository;
-import com.ti.formproject.services.exceptions.AlreadyExistsException;
+import com.ti.formproject.services.exceptions.AlreadyRegisteredException;
 import com.ti.formproject.services.exceptions.DatabaseException;
 import com.ti.formproject.services.exceptions.ResourceNotFoundException;
 
@@ -56,7 +56,7 @@ public class ClientService {
 		List<Client> list = repository.findAll();
 		for (Client x : list) {
 			if (x.equals(obj)) {
-				throw new AlreadyExistsException();
+				throw new AlreadyRegisteredException();
 			}
 		}
 	}
