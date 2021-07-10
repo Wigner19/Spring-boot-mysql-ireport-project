@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ti.formproject.services.exceptions.AlreadyRegisteredException;
-import com.ti.formproject.services.exceptions.DatabaseException;
 import com.ti.formproject.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -52,12 +51,6 @@ public class ResourceExceptionHandler {
 			default:
 			 return mav;
 		}
-	}
-	
-	@ExceptionHandler(DatabaseException.class)
-	public ModelAndView database() {
-		ModelAndView mav = new ModelAndView("databaseErro");
-		return mav;
 	}
 	
 }

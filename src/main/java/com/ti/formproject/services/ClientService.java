@@ -5,14 +5,12 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.ti.formproject.entities.Client;
 import com.ti.formproject.repositories.ClientRepository;
 import com.ti.formproject.services.exceptions.AlreadyRegisteredException;
-import com.ti.formproject.services.exceptions.DatabaseException;
 import com.ti.formproject.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -66,8 +64,6 @@ public class ClientService {
 			repository.deleteById(id);			
 		} catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Client not found");
-		} catch(DataIntegrityViolationException e) {
-			throw new DatabaseException(e.getMessage());
 		}
 	}
 }

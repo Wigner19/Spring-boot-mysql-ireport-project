@@ -1,17 +1,12 @@
 package com.ti.formproject.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
@@ -24,9 +19,6 @@ public class Product implements Serializable {
 	private Long id;
 	private String name;
 	private Double price;
-	
-	@OneToMany(mappedBy = "id.product")
-	private Set<OrderItem> items = new HashSet<>();
 	
 	public Product() {
 	}
@@ -61,16 +53,6 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 	
-	@JsonIgnore
-	public Set<Order> getOrders() {
-		Set<Order> order = new HashSet<>();
-		
-		for (OrderItem x : items) {
-			order.add(x.getOrder());
-		}
-		return order;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
