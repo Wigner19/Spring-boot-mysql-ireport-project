@@ -79,6 +79,21 @@ nav {
 	display: block;
 }
 
+.nav_list li .reports {
+	position: absolute;
+	top:55px;
+	right: 180px;
+	display: none;
+}
+
+.nav_list li:hover .reports, .nav_list li.over .reports {
+	display: block;
+}
+
+.nav_list li .reports li {
+	display: block;
+}
+
 main {
 	display: inline-flex;
     background-color: #E9F1F4;

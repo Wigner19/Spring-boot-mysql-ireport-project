@@ -1,5 +1,7 @@
 package com.ti.formproject.services;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -12,6 +14,14 @@ import com.ti.formproject.entities.Product;
 import com.ti.formproject.repositories.ProductRepository;
 import com.ti.formproject.services.exceptions.AlreadyRegisteredException;
 import com.ti.formproject.services.exceptions.ResourceNotFoundException;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class ProductService {
@@ -64,5 +74,18 @@ public class ProductService {
 		} catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Product not found");
 		}
+	}
+	
+	public byte[] generateReport() throws FileNotFoundException, JRException {
+		JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(repository.findAll());
+
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream(
+				"C:\\Users\\wigne\\Desktop\\Crud\\FormProject\\src\\main\\resources\\productsReport.jrxml"));
+
+		JasperPrint report = JasperFillManager.fillReport(compileReport, null, datasource);
+		
+		byte[] data = JasperExportManager.exportReportToPdf(report);
+		
+		return data;
 	}
 }

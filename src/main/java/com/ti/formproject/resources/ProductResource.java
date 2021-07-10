@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ti.formproject.entities.Product;
 import com.ti.formproject.services.ProductService;
+
+import net.sf.jasperreports.engine.JRException;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -70,5 +74,13 @@ public class ProductResource {
 	public void delete(@PathParam(value="product_id") Long product_id, HttpServletResponse httpResponse) throws IOException {
 		service.delete(product_id);
 		httpResponse.sendRedirect("/products");
+	}
+	
+	@GetMapping(value = "/pdf")
+	public ResponseEntity<byte[]> generatePdf(HttpServletResponse httpResponse) throws JRException, IOException{
+		byte[] data = service.generateReport();
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=clientReport.pdf");
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 }

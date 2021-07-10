@@ -10,50 +10,55 @@
 	
 	<body>
 	
-	<header>
-	
-		<nav class="nav">
-		
-		    <div class="nav_logo"><i class='bx bxl-spring-boot' ></i></div>
-		
-		    <ul class="nav_list">
-		
-		        <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a>
-		        	<ul class='products'>
-		        		<li><a href="/products/formProduct"><i class='bx bxs-user'>ADD PRODUCT</i></a></li>
-		        	</ul>
-		        </li>
-		        
-		        
-		        <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a>
-		        	<ul class="clients">
-		        		<li><a href="/clients/formClient"><i class='bx bxs-user'>ADD CLIENT</i></a></li>
-		        	</ul>
-		        </li>
-		        
-		        <li><a href="/orders"><i class='bx bxs-cart-add'>REPORT</i></a></li>
-		
-		    </ul>
-		
-		</nav>
+		 <header class="menu">
 
-	</header>
-	
-	<main>
-	
-		<h1>Atualizar Produto</h1>
+            <nav class="nav">
+
+                <div class="nav_logo"><i class='bx bxl-spring-boot' ></i></div>
+
+                <ul class="nav_list">
+
+                    <li><a href="/products"><i class='bx bxs-home-smile'>PRODUCTS</i></a>
+                    	<ul class='products'>
+                    		<li><a href="/products/formProduct"><i class='bx bxs-user'>ADD PRODUCT</i></a></li>
+                    	</ul>
+                    </li>
+                    
+                    
+                    <li><a href="/clients"><i class='bx bxs-user'>CLIENTS</i></a>
+                    	<ul class="clients">
+                    		<li><a href="/clients/formClient"><i class='bx bxs-user'>ADD CLIENT</i></a></li>
+                    	</ul>
+                    </li>
+                    
+                    <li><a><i class='bx bxs-cart-add'>REPORT</i></a>
+                    	<ul class='reports'>
+                    		<li><a class="link" target="_blank" href="/products/pdf"><i class='bx bxs-user'>PRODUCT PDF</i></a></li>
+                    		<li><a class="link" target="_blank" href="/clients/pdf"><i class='bx bxs-user'>CLIENT PDF</i></a></li>
+                    	</ul>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </header>
+
+		<main>
 		
-		<h1 th:each="error : ${Error}"><Span th:text="${error}"></Span></h1>
-		
-		<form th:each="product : ${product}" th:action="@{/products/updateProduct(product_id=${4})}" th:object="${product}" method="post">
-			<div>
-				<input type="hidden" name="id" th:value="${product.id}"/>
-				Name: <input type="text" name="name" th:value="${product.name}" required/>
-				Price: <input type="number" name="price" th:value="${product.price}" required/>
-				<button type="submit">Salvar</button>			
-			</div>
-		</form>
-		
-	</main>
+			<h1>Atualizar Produto</h1>
+			
+			<h1 th:each="error : ${Error}"><Span th:text="${error}"></Span></h1>
+			
+			<form th:each="product : ${product}" th:action="@{/products/updateProduct(product_id=${4})}" th:object="${product}" method="post">
+				<div>
+					<input type="hidden" name="id" th:value="${product.id}"/>
+					Name: <input type="text" name="name" th:value="${product.name}" required/>
+					Price: <input type="number" name="price" th:value="${product.price}" required/>
+					<button type="submit">Salvar</button>			
+				</div>
+			</form>
+			
+		</main>
 	</body>
 </html>
