@@ -82,7 +82,7 @@ nav {
 
 main {
 	display: inline-flex;
-    background-color: gray;
+    background-color: #E9F1F4;
     padding: 15px;
     width: 100%;
     height: 85vh;
@@ -101,6 +101,7 @@ main {
 }
 
 .items {
+	background-color: #034384;
     position: relative;
     border: 5px solid #034384;
 	box-shadow: 2px 2px 2px white;

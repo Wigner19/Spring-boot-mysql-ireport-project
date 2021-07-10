@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: black;
+    font-family: "Press Start 2P";
+}
+
+a:hover {
+    color: orange;
+    transition: .5s;
+}
+
+h1 {
+	text-align: center;
+}
